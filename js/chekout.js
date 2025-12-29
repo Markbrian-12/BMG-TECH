@@ -39,7 +39,9 @@ document.addEventListener("DOMContentLoaded", ()=>{
       alert("Your cart is empty!");
       return;
     }
-    
+    if(payment === "cod"){
+  summary.innerHTML = `<p>Cash on Delivery selected. Pay when your order arrives.</p>`;
+}
     if(payment === "mpesa"){
   const phone = document.getElementById("phone").value;
   const amount = getTotal();

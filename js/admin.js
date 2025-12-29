@@ -8,17 +8,27 @@ document.addEventListener("DOMContentLoaded", ()=>{
 
   // ✅ Pre-populated BMG-TECH Products
   let products = JSON.parse(localStorage.getItem("products")) || [
-    { name: "Hair Clippers", price: 2500, img: "https://via.placeholder.com/300x180?text=Hair+Clippers", category: "Haircare" },
-    { name: "Cosmetics Kit", price: 1800, img: "https://via.placeholder.com/300x180?text=Cosmetics+Kit", category: "Cosmetics" },
-    { name: "Premium Shampoo", price: 900, img: "https://via.placeholder.com/300x180?text=Premium+Shampoo", category: "Haircare" },
-    { name: "Hair Dryer", price: 3200, img: "https://via.placeholder.com/300x180?text=Hair+Dryer", category: "Haircare" },
-    { name: "Beard Trimmer", price: 2000, img: "https://via.placeholder.com/300x180?text=Beard+Trimmer", category: "Haircare" },
-    { name: "Facial Serum", price: 1500, img: "https://via.placeholder.com/300x180?text=Facial+Serum", category: "Cosmetics" },
-    { name: "Lipstick Set", price: 1200, img: "https://via.placeholder.com/300x180?text=Lipstick+Set", category: "Cosmetics" },
-    { name: "Conditioner", price: 800, img: "https://via.placeholder.com/300x180?text=Conditioner", category: "Haircare" },
-    { name: "Makeup Brushes", price: 1800, img: "https://via.placeholder.com/300x180?text=Makeup+Brushes", category: "Cosmetics" },
-    { name: "Hair Gel", price: 600, img: "https://via.placeholder.com/300x180?text=Hair+Gel", category: "Haircare" }
-  ];
+  { name: "Matte Lipstick", price: 1200, img: "images/lipstick1.jpg", category: "Makeup" },
+  { name: "Liquid Foundation", price: 2800, img: "images/foundation1.jpg", category: "Makeup" },
+  { name: "Eyeshadow Palette", price: 3500, img: "images/eyeshadow1.jpg", category: "Makeup" },
+  { name: "Blush Compact", price: 1800, img: "images/blush1.jpg", category: "Makeup" },
+  { name: "Beauty Serum", price: 3200, img: "images/serum1.jpg", category: "Skincare" },
+  { name: "Facial Cleanser", price: 2600, img: "images/cleanser1.jpg", category: "Skincare" },
+  { name: "Moisturizing Cream", price: 2400, img: "images/cream1.jpg", category: "Skincare" },
+  { name: "Makeup Brushes Set", price: 2400, img: "images/brushes1.jpg", category: "Accessories" },
+  { name: "Setting Powder", price: 2000, img: "images/powder1.jpg", category: "Makeup" },
+  { name: "Lip Gloss", price: 1100, img: "images/lipgloss1.jpg", category: "Makeup" },
+  { name: "BB Cream", price: 2200, img: "images/bbcream1.jpg", category: "Skincare" },
+  { name: "Highlighter Palette", price: 3300, img: "images/highlighter1.jpg", category: "Makeup" },
+  { name: "Eyeliner Pen", price: 900, img: "images/eyeliner1.jpg", category: "Makeup" },
+  { name: "Mascara", price: 1500, img: "images/mascara1.jpg", category: "Makeup" },
+  { name: "Perfume Spray", price: 4500, img: "images/perfume1.jpg", category: "Fragrance" },
+  { name: "Face Mask Pack", price: 1300, img: "images/facemask1.jpg", category: "Skincare" },
+  { name: "Sunscreen SPF50", price: 2100, img: "images/sunscreen1.jpg", category: "Skincare" },
+  { name: "Nail Polish Set", price: 1700, img: "images/nailpolish1.jpg", category: "Makeup" },
+  { name: "Compact Mirror", price: 800, img: "images/mirror1.jpg", category: "Accessories" },
+  { name: "Hair Conditioner", price: 1800, img: "images/conditioner1.jpg", category: "Haircare" }
+];
 
   function renderProducts(){
     tableBody.innerHTML="";

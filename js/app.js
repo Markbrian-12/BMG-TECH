@@ -30,29 +30,50 @@ document.addEventListener("DOMContentLoaded", () => {
   if (featuredContainer) renderProducts(featuredContainer, products.slice(0,1)); // First product as featured
   if (allContainer) renderProducts(allContainer, products);
 
- // SEARCH: Live + Enter key
+// SEARCH: Live + Enter key + Highlight + No Results
 const searchInput = document.getElementById("search");
 if(searchInput){
   function performSearch(){
     const query = searchInput.value.toLowerCase();
+    let found = false;
+
     document.querySelectorAll(".products .product").forEach(product => {
-      const name = product.querySelector("h3").innerText.toLowerCase();
-      product.style.display = name.includes(query) ? "block" : "none";
+      const nameElement = product.querySelector("h3");
+      const name = nameElement.innerText;
+      if(name.toLowerCase().includes(query) && query !== ""){
+        // Highlight matching text
+        const regex = new RegExp(`(${query})`, "gi");
+        nameElement.innerHTML = name.replace(regex, "<span class='highlight'>$1</span>");
+        product.style.display = "block";
+        found = true;
+      } else if(query === ""){
+        // Reset highlight if search is empty
+        nameElement.innerHTML = name;
+        product.style.display = "block";
+        found = true;
+      } else {
+        // Hide unmatched products
+        nameElement.innerHTML = name;
+        product.style.display = "none";
+      }
     });
+
+    // Handle "No results"
+    let noResults = document.getElementById("no-results");
+    if(!noResults){
+      noResults = document.createElement("div");
+      noResults.id = "no-results";
+      noResults.style.textAlign = "center";
+      noResults.style.padding = "20px";
+      noResults.style.color = "#f44336";
+      document.querySelector(".products").appendChild(noResults);
+    }
+    noResults.innerText = found ? "" : "No products found";
   }
 
   // Live search as you type
-  searchInput.addEventListener("input", performSearch);
+  searchInput.add
 
-  // Trigger search on Enter key
-  searchInput.addEventListener("keydown", e => {
-    if(e.key === "Enter"){
-      performSearch();
-    }
-  });
-}
-  });
-}
 
   // Category filter
   document.querySelectorAll(".category-btn").forEach(btn => {

@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>BMG-TECH | Checkout</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header>
+    <h1>BMG-TECH Checkout</h1>
+    <a href="index.html">Home</a>
+    <a href="cart.html">Cart</a>
+  </header>
+
+  <main class="checkout-container">
+    <h2>Billing & Payment</h2>
+    <form id="checkout-form">
+      <label for="name">Full Name:</label>
+      <input type="text" id="name" required>
+
+      <label for="email">Email:</label>
+      <input type="email" id="email" required>
+
+      <label for="phone">Phone Number:</label>
+      <input type="tel" id="phone" required>
+
+      <label for="address">Delivery Address:</label>
+      <textarea id="address" required></textarea>
+
+      <label for="payment">Select Payment Method:</label>
+      <select id="payment" required>
+        <option value="">--Choose--</option>
+        <option value="mpesa">M-PESA</option>
+        <option value="paypal">PayPal</option>
+        <option value="cod">Cash on Delivery</option>
+      </select>
+
+      <button type="submit">Place Order</button>
+    </form>
+
+    <div id="order-summary" style="margin-top:20px;"></div>
+  </main>
+
+  <footer>
+    &copy; 2025 BMG-TECH. All rights reserved.
+  </footer>
+
+  <script src="js/checkout.js"></script>
+</body>
+</html>

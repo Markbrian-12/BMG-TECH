@@ -1,7 +1,8 @@
 const products = [
-  { name: "Hair Clippers", price: 2500, img: "images/item1.jpg", category: "Haircare" },
-  { name: "Cosmetics Kit", price: 1800, img: "images/item2.jpg", category: "Cosmetics" },
-  { name: "Premium Shampoo", price: 900, img: "images/item3.jpg", category: "Haircare" }
+ const products = [
+  { name: "Hair Clippers", price: 2500, img: "https://via.placeholder.com/300x180/cccccc/000000?text=Hair+Clippers", category: "Haircare" },
+  { name: "Cosmetics Kit", price: 1800, img: "https://via.placeholder.com/300x180/cccccc/000000?text=Cosmetics+Kit", category: "Cosmetics" },
+  { name: "Premium Shampoo", price: 900, img: "https://via.placeholder.com/300x180/cccccc/000000?text=Premium+Shampoo", category: "Haircare" }
 ];
 
 document.addEventListener("DOMContentLoaded", () => {

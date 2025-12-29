@@ -43,6 +43,22 @@ document.addEventListener("DOMContentLoaded", ()=>{
     if(payment === "mpesa"){
   const phone = document.getElementById("phone").value;
   const amount = getTotal();
+if(payment==="paypal"){
+  paypal.Buttons({
+    createOrder: function(data, actions){
+      return actions.order.create({
+        purchase_units: [{
+          amount: { value: (getTotal()/150).toFixed(2) } // KES to USD approx
+        }]
+      });
+    },
+    onApprove: function(data, actions){
+      return actions.order.capture().then(function(details){
+        summary.innerHTML = `<p>Transaction completed by ${details.payer.name.given_name}</p>`;
+      });
+    }
+  }).render('#paypal-button-container');
+}
 
   fetch("http://localhost:3000/api/mpesa/stk", {
     method:"POST",

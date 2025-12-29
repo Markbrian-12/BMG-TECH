@@ -1,5 +1,5 @@
-const products = [
- const products = [
+// Load products from localStorage or use default if empty
+let products = JSON.parse(localStorage.getItem("products")) || [
   { name: "Hair Clippers", price: 2500, img: "https://via.placeholder.com/300x180/cccccc/000000?text=Hair+Clippers", category: "Haircare" },
   { name: "Cosmetics Kit", price: 1800, img: "https://via.placeholder.com/300x180/cccccc/000000?text=Cosmetics+Kit", category: "Cosmetics" },
   { name: "Premium Shampoo", price: 900, img: "https://via.placeholder.com/300x180/cccccc/000000?text=Premium+Shampoo", category: "Haircare" }

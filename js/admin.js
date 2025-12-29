@@ -6,10 +6,18 @@ document.addEventListener("DOMContentLoaded", ()=>{
   const addBtn = document.getElementById("add-product-btn");
   const tableBody = document.getElementById("product-table-body");
 
+  // ✅ Pre-populated BMG-TECH Products
   let products = JSON.parse(localStorage.getItem("products")) || [
     { name: "Hair Clippers", price: 2500, img: "https://via.placeholder.com/300x180?text=Hair+Clippers", category: "Haircare" },
     { name: "Cosmetics Kit", price: 1800, img: "https://via.placeholder.com/300x180?text=Cosmetics+Kit", category: "Cosmetics" },
-    { name: "Premium Shampoo", price: 900, img: "https://via.placeholder.com/300x180?text=Premium+Shampoo", category: "Haircare" }
+    { name: "Premium Shampoo", price: 900, img: "https://via.placeholder.com/300x180?text=Premium+Shampoo", category: "Haircare" },
+    { name: "Hair Dryer", price: 3200, img: "https://via.placeholder.com/300x180?text=Hair+Dryer", category: "Haircare" },
+    { name: "Beard Trimmer", price: 2000, img: "https://via.placeholder.com/300x180?text=Beard+Trimmer", category: "Haircare" },
+    { name: "Facial Serum", price: 1500, img: "https://via.placeholder.com/300x180?text=Facial+Serum", category: "Cosmetics" },
+    { name: "Lipstick Set", price: 1200, img: "https://via.placeholder.com/300x180?text=Lipstick+Set", category: "Cosmetics" },
+    { name: "Conditioner", price: 800, img: "https://via.placeholder.com/300x180?text=Conditioner", category: "Haircare" },
+    { name: "Makeup Brushes", price: 1800, img: "https://via.placeholder.com/300x180?text=Makeup+Brushes", category: "Cosmetics" },
+    { name: "Hair Gel", price: 600, img: "https://via.placeholder.com/300x180?text=Hair+Gel", category: "Haircare" }
   ];
 
   function renderProducts(){

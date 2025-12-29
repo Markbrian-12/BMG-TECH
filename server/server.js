@@ -4,9 +4,9 @@ const axios = require('axios');
 const app = express();
 app.use(express.json());
 
-const consumerKey = 'YOUR_CONSUMER_KEY';
-const consumerSecret = 'YOUR_CONSUMER_SECRET';
-const shortcode = 'YOUR_SHORTCODE';
+const consumerKey = '7vDzyJyp1riBzKmHUHhp3ms5iasB4cAIUlp80A4eR2Q2QupG';
+const consumerSecret = 'fH1e5iA71mF49wkV3txMeBBcu73DlIPV5E8XCSFIDkcQAAybpH2fnj1L8xFZuVr7';
+const shortcode = 'N/A';
 const passkey = 'YOUR_PASSKEY';
 const callbackURL = 'https://yourdomain.com/api/mpesa/callback';
 

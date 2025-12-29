@@ -39,12 +39,22 @@ document.addEventListener("DOMContentLoaded", ()=>{
       alert("Your cart is empty!");
       return;
     }
+    
+    if(payment === "mpesa"){
+  const phone = document.getElementById("phone").value;
+  const amount = getTotal();
 
-    if(!payment){
-      alert("Select a payment method!");
-      return;
-    }
-
+  fetch("http://localhost:3000/api/mpesa/stk", {
+    method:"POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ phone, amount })
+  })
+  .then(res => res.json())
+  .then(data => {
+    summary.innerHTML = `<p>STK Push sent! Check your phone to complete payment.</p>`;
+  });
+}
+    
     let paymentMsg = "";
     switch(payment){
       case "mpesa":

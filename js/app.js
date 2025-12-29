@@ -6,17 +6,16 @@ let products = JSON.parse(localStorage.getItem("products")) || [
 ];
 
 document.addEventListener("DOMContentLoaded", () => {
-
   const featuredContainer = document.getElementById("featured-products");
   const allContainer = document.getElementById("all-products");
 
   function renderProducts(container, list){
-    container.innerHTML="";
-    list.forEach(p=>{
-      const div=document.createElement("div");
+    container.innerHTML = "";
+    list.forEach(p => {
+      const div = document.createElement("div");
       div.classList.add("product");
       div.setAttribute("data-category", p.category);
-      div.innerHTML=`
+      div.innerHTML = `
         <a href="product.html?item=${encodeURIComponent(p.name)}">
           <img src="${p.img}" alt="${p.name}">
           <h3>${p.name}</h3>
@@ -28,54 +27,54 @@ document.addEventListener("DOMContentLoaded", () => {
     });
   }
 
-  if(featuredContainer) renderProducts(featuredContainer, [products[0]]);
-  if(allContainer) renderProducts(allContainer, products);
+  if (featuredContainer) renderProducts(featuredContainer, products.slice(0,1)); // First product as featured
+  if (allContainer) renderProducts(allContainer, products);
 
-  // SEARCH
-  const searchInput=document.getElementById("search");
-  if(searchInput){
-    searchInput.addEventListener("input", e=>{
-      const query=e.target.value.toLowerCase();
-      document.querySelectorAll(".products .product").forEach(product=>{
-        const name=product.querySelector("h3").innerText.toLowerCase();
-        product.style.display = name.includes(query)?"block":"none";
+  // Search
+  const searchInput = document.getElementById("search");
+  if (searchInput) {
+    searchInput.addEventListener("input", e => {
+      const query = e.target.value.toLowerCase();
+      document.querySelectorAll(".products .product").forEach(product => {
+        const name = product.querySelector("h3").innerText.toLowerCase();
+        product.style.display = name.includes(query) ? "block" : "none";
       });
     });
   }
 
-  // CATEGORY FILTER
-  document.querySelectorAll(".category-btn").forEach(btn=>{
-    btn.addEventListener("click", ()=>{
-      const category=btn.dataset.category;
-      document.querySelectorAll(".products .product").forEach(p=>{
-        const pCat=p.dataset.category;
-        p.style.display=(category==="all"||pCat===category)?"block":"none";
+  // Category filter
+  document.querySelectorAll(".category-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      const category = btn.dataset.category;
+      document.querySelectorAll(".products .product").forEach(p => {
+        const pCat = p.dataset.category;
+        p.style.display = (category === "all" || pCat === category) ? "block" : "none";
       });
     });
   });
 
-  // CART
-  const cartContainer=document.querySelector(".cart-items");
-  const totalDisplay=document.querySelector(".total");
-  let cart=JSON.parse(localStorage.getItem("cart"))||[];
+  // Cart functionality (same as before)
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const cartContainer = document.querySelector(".cart-items");
+  const totalDisplay = document.querySelector(".total");
 
-  function renderCart(){
-    if(!cartContainer) return;
-    cartContainer.innerHTML="";
-    let total=0;
-    cart.forEach((item,index)=>{
-      total+=item.price*(item.qty||1);
-      const div=document.createElement("div");
+  function renderCart() {
+    if (!cartContainer) return;
+    cartContainer.innerHTML = "";
+    let total = 0;
+    cart.forEach((item, index) => {
+      total += item.price * (item.qty || 1);
+      const div = document.createElement("div");
       div.classList.add("cart-item");
-      div.innerHTML=`
+      div.innerHTML = `
         <span>${item.name}</span>
         <span>KES ${item.price}</span>
-        <input type="number" min="1" value="${item.qty||1}" data-index="${index}">
+        <input type="number" min="1" value="${item.qty || 1}" data-index="${index}">
         <button data-index="${index}">Remove</button>
       `;
       cartContainer.appendChild(div);
     });
-    if(totalDisplay) totalDisplay.innerText=`Total: KES ${total}`;
+    if (totalDisplay) totalDisplay.innerText = `Total: KES ${total}`;
     localStorage.setItem("cart", JSON.stringify(cart));
   }
 
@@ -84,34 +83,33 @@ document.addEventListener("DOMContentLoaded", () => {
   if(cartContainer){
     cartContainer.addEventListener("input", e=>{
       if(e.target.tagName==="INPUT"){
-        const idx=e.target.dataset.index;
-        cart[idx].qty=Number(e.target.value);
+        const idx = e.target.dataset.index;
+        cart[idx].qty = Number(e.target.value);
         renderCart();
       }
     });
 
     cartContainer.addEventListener("click", e=>{
       if(e.target.tagName==="BUTTON"){
-        const idx=e.target.dataset.index;
+        const idx = e.target.dataset.index;
         cart.splice(idx,1);
         renderCart();
       }
     });
   }
 
-  // HOMEPAGE ADD TO CART
+  // Homepage Add to Cart
   document.querySelectorAll("button.add-to-cart").forEach(btn=>{
     btn.addEventListener("click", e=>{
-      const prodDiv=e.target.parentElement;
-      const name=prodDiv.querySelector("h3").innerText;
-      const price=Number(prodDiv.querySelector("p").innerText.replace(/[^0-9]/g,""));
-      const existing=cart.find(c=>c.name===name);
-      if(existing) existing.qty=(existing.qty||1)+1;
-      else cart.push({name,price,qty:1});
+      const prodDiv = e.target.parentElement;
+      const name = prodDiv.querySelector("h3").innerText;
+      const price = Number(prodDiv.querySelector("p").innerText.replace(/[^0-9]/g,""));
+      const existing = cart.find(c => c.name === name);
+      if(existing) existing.qty = (existing.qty || 1) + 1;
+      else cart.push({name, price, qty: 1});
       localStorage.setItem("cart", JSON.stringify(cart));
       alert(`${name} added to cart at BMG-TECH!`);
       renderCart();
     });
   });
-
 });

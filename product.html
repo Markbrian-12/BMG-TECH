@@ -7,44 +7,49 @@
 </head>
 <body>
 <header>
-  <h1>Bossie Shop</h1>
+  <h1><img src="images/logo.png" alt="Bossie Shop" style="height:40px; vertical-align: middle;"> Bossie Shop</h1>
   <a href="index.html">🏠 Home</a>
   <a href="cart.html">🛒 Cart</a>
 </header>
 
 <main class="product-detail">
-  <img id="product-img" src="images/item1.jpg" alt="Product" style="width:300px; border-radius:5px;">
+  <img id="product-img" src="" alt="Product" style="width:300px; border-radius:5px;">
   <h2 id="product-name">Product Name</h2>
   <p id="product-price">KES 0</p>
   <button id="add-cart-btn">Add to Cart</button>
 </main>
 
+<footer>
+  <p>© 2025 Bossie Shop | All Rights Reserved</p>
+</footer>
+
 <script src="js/app.js"></script>
 <script>
-  // Get item from query string
-  const params = new URLSearchParams(window.location.search);
-  const itemName = params.get("item");
+const params = new URLSearchParams(window.location.search);
+const itemName = params.get("item");
 
-  // Map of product details
-  const products = {
-    "Hair Clippers": { price: "KES 2,500", img: "images/item1.jpg" },
-    "Cosmetics Kit": { price: "KES 1,800", img: "images/item2.jpg" },
-    "Premium Shampoo": { price: "KES 900", img: "images/item3.jpg" }
-  };
+// Product data
+const products = [
+  { name: "Hair Clippers", price: 2500, img: "images/item1.jpg", category: "Haircare" },
+  { name: "Cosmetics Kit", price: 1800, img: "images/item2.jpg", category: "Cosmetics" },
+  { name: "Premium Shampoo", price: 900, img: "images/item3.jpg", category: "Haircare" }
+];
 
-  const product = products[itemName] || { price: "KES 0", img: "images/item1.jpg" };
+const product = products.find(p => p.name === itemName) || products[0];
 
-  document.getElementById("product-name").innerText = itemName;
-  document.getElementById("product-price").innerText = product.price;
-  document.getElementById("product-img").src = product.img;
+document.getElementById("product-name").innerText = product.name;
+document.getElementById("product-price").innerText = "KES " + product.price;
+document.getElementById("product-img").src = product.img;
 
-  // Add to cart button
-  document.getElementById("add-cart-btn").addEventListener("click", () => {
-    let cart = JSON.parse(localStorage.getItem("cart")) || [];
-    cart.push({ name: itemName, price: product.price });
-    localStorage.setItem("cart", JSON.stringify(cart));
-    alert(`${itemName} added to cart!`);
-  });
+// Add to cart
+document.getElementById("add-cart-btn").addEventListener("click", () => {
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+  const existing = cart.find(c => c.name === product.name);
+  if (existing) existing.qty = (existing.qty || 1) + 1;
+  else cart.push({ name: product.name, price: product.price, qty: 1 });
+  localStorage.setItem("cart", JSON.stringify(cart));
+  alert(`${product.name} added to cart!`);
+});
 </script>
 </body>
 </html>

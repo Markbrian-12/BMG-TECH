@@ -15,10 +15,14 @@
   <a href="cart.html">🛒 Cart</a>
 </header>
 
-<div class="categories">
-  <button class="category-btn" data-category="all">All</button>
-  <button class="category-btn" data-category="Haircare">Haircare</button>
-  <button class="category-btn" data-category="Cosmetics">Cosmetics</button>
+<div class="sort-container">
+  <label for="sort">Sort by: </label>
+  <select id="sort">
+    <option value="default">Default</option>
+    <option value="price-asc">Price: Low → High</option>
+    <option value="price-desc">Price: High → Low</option>
+    <option value="name-asc">Name: A → Z</option>
+  </select>
 </div>
 
 <section class="featured-deals">
@@ -37,6 +41,7 @@
 <script src="js/app.js"></script>
 </body>
 </html>
+
 
 
 

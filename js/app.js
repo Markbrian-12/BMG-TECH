@@ -30,17 +30,27 @@ document.addEventListener("DOMContentLoaded", () => {
   if (featuredContainer) renderProducts(featuredContainer, products.slice(0,1)); // First product as featured
   if (allContainer) renderProducts(allContainer, products);
 
-  // SEARCH with Enter key
+ // SEARCH: Live + Enter key
 const searchInput = document.getElementById("search");
 if(searchInput){
+  function performSearch(){
+    const query = searchInput.value.toLowerCase();
+    document.querySelectorAll(".products .product").forEach(product => {
+      const name = product.querySelector("h3").innerText.toLowerCase();
+      product.style.display = name.includes(query) ? "block" : "none";
+    });
+  }
+
+  // Live search as you type
+  searchInput.addEventListener("input", performSearch);
+
+  // Trigger search on Enter key
   searchInput.addEventListener("keydown", e => {
-    if(e.key === "Enter"){ // Trigger search on Enter
-      const query = searchInput.value.toLowerCase();
-      document.querySelectorAll(".products .product").forEach(product => {
-        const name = product.querySelector("h3").innerText.toLowerCase();
-        product.style.display = name.includes(query) ? "block" : "none";
-      });
+    if(e.key === "Enter"){
+      performSearch();
     }
+  });
+}
   });
 }
 

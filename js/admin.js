@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", ()=>{
   const productName = document.getElementById("product-name");
   const productPrice = document.getElementById("product-price");
   const productImg = document.getElementById("product-img");
@@ -12,11 +12,11 @@ document.addEventListener("DOMContentLoaded", () => {
     { name: "Premium Shampoo", price: 900, img: "https://via.placeholder.com/300x180?text=Premium+Shampoo", category: "Haircare" }
   ];
 
-  function renderProducts() {
-    tableBody.innerHTML = "";
-    products.forEach((p, idx) => {
+  function renderProducts(){
+    tableBody.innerHTML="";
+    products.forEach((p,idx)=>{
       const tr = document.createElement("tr");
-      tr.innerHTML = `
+      tr.innerHTML=`
         <td>${p.name}</td>
         <td>${p.price}</td>
         <td>${p.category}</td>
@@ -28,33 +28,31 @@ document.addEventListener("DOMContentLoaded", () => {
       `;
       tableBody.appendChild(tr);
     });
-    localStorage.setItem("products", JSON.stringify(products));
+    localStorage.setItem("products",JSON.stringify(products));
   }
 
   renderProducts();
 
-  // Add new product
-  addBtn.addEventListener("click", () => {
-    if(!productName.value || !productPrice.value || !productImg.value || !productCategory.value){
+  addBtn.addEventListener("click", ()=>{
+    if(!productName.value||!productPrice.value||!productImg.value||!productCategory.value){
       alert("Fill all fields!");
       return;
     }
     products.push({
-      name: productName.value,
-      price: Number(productPrice.value),
-      img: productImg.value,
-      category: productCategory.value
+      name:productName.value,
+      price:Number(productPrice.value),
+      img:productImg.value,
+      category:productCategory.value
     });
-    productName.value = "";
-    productPrice.value = "";
-    productImg.value = "";
-    productCategory.value = "";
+    productName.value="";
+    productPrice.value="";
+    productImg.value="";
+    productCategory.value="";
     renderProducts();
     alert("Product added successfully!");
   });
 
-  // Edit & Delete
-  tableBody.addEventListener("click", e => {
+  tableBody.addEventListener("click", e=>{
     const idx = e.target.dataset.index;
     if(e.target.classList.contains("delete-btn")){
       if(confirm("Are you sure you want to delete this product?")){
@@ -63,13 +61,13 @@ document.addEventListener("DOMContentLoaded", () => {
       }
     }
     if(e.target.classList.contains("edit-btn")){
-      const p = products[idx];
-      const newName = prompt("Edit Name:", p.name);
-      const newPrice = prompt("Edit Price:", p.price);
-      const newImg = prompt("Edit Image URL:", p.img);
-      const newCat = prompt("Edit Category:", p.category);
+      const p=products[idx];
+      const newName=prompt("Edit Name:",p.name);
+      const newPrice=prompt("Edit Price:",p.price);
+      const newImg=prompt("Edit Image URL:",p.img);
+      const newCat=prompt("Edit Category:",p.category);
       if(newName && newPrice && newImg && newCat){
-        products[idx] = { name:newName, price:Number(newPrice), img:newImg, category:newCat };
+        products[idx]={name:newName,price:Number(newPrice),img:newImg,category:newCat};
         renderProducts();
       }
     }

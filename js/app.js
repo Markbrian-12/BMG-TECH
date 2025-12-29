@@ -5,7 +5,89 @@ let products = JSON.parse(localStorage.getItem("products")) || [
   { name: "Premium Shampoo", price: 900, img: "https://via.placeholder.com/300x180/cccccc/000000?text=Premium+Shampoo", category: "Haircare" }
 ];
 
-document.addEventListener("DOMContentLoaded", () => {
+document.addEventListener("DOMContentLoaded", (const sortSelect = document.getElementById("sort");
+if(sortSelect){
+  sortSelect.addEventListener("change", () => {
+    const value = sortSelect.value;
+    let sortedProducts = [...products];
+
+    switch(value){
+      case "price-asc":
+        sortedProducts.sort((a,b)=>a.price - b.price);
+        break;
+      case "price-desc":
+        sortedProducts.sort((a,b)=>b.price - a.price);
+        break;
+      case "name-asc":
+        sortedProducts.sort((a,b)=>a.name.localeCompare(b.name));
+        break;
+      default:
+        sortedProducts = [...products]; // default order
+    }
+
+    // Re-render products with sorting + combined search/category
+    performSortAndSearch(sortedProducts);
+  });
+}
+
+// Modified render function to include sorting + search + category
+function performSortAndSearch(list){
+  const query = searchInput.value.toLowerCase();
+  let found = false;
+
+  document.querySelectorAll(".products .product").forEach(p=>p.remove()); // clear current
+
+  const container = document.querySelector(".all-products");
+  list.forEach(p=>{
+    if((selectedCategory === "all" || p.category === selectedCategory) &&
+       (p.name.toLowerCase().includes(query) || query === "")){
+      
+      const div = document.createElement("div");
+      div.classList.add("product");
+      div.setAttribute("data-category", p.category);
+      const regex = query!=="" ? new RegExp(`(${query})`, "gi") : null;
+      const highlightedName = regex ? p.name.replace(regex, "<span class='highlight'>$1</span>") : p.name;
+      div.innerHTML = `
+        <a href="product.html?item=${encodeURIComponent(p.name)}">
+          <img src="${p.img}" alt="${p.name}">
+          <h3>${highlightedName}</h3>
+        </a>
+        <p>KES ${p.price}</p>
+        <button class="add-to-cart">Add to Cart</button>
+      `;
+      container.appendChild(div);
+      found = true;
+    }
+  });
+
+  // No results message
+  let noResults = document.getElementById("no-results");
+  if(!noResults){
+    noResults = document.createElement("div");
+    noResults.id = "no-results";
+    noResults.style.textAlign = "center";
+    noResults.style.padding = "20px";
+    noResults.style.color = "#f44336";
+    container.appendChild(noResults);
+  }
+  noResults.innerText = found ? "" : "No products found";
+
+  // Re-add Add to Cart buttons
+  document.querySelectorAll("button.add-to-cart").forEach(btn=>{
+    btn.addEventListener("click", e=>{
+      const prodDiv = e.target.parentElement;
+      const name = prodDiv.querySelector("h3").innerText.replace(/<[^>]*>/g, "");
+      const price = Number(prodDiv.querySelector("p").innerText.replace(/[^0-9]/g,""));
+      const existing = cart.find(c => c.name === name);
+      if(existing) existing.qty = (existing.qty || 1) + 1;
+      else cart.push({name, price, qty: 1});
+      localStorage.setItem("cart", JSON.stringify(cart));
+      alert(`${name} added to cart at BMG-TECH!`);
+      renderCart();
+    });
+  });
+}
+) => {
   const featuredContainer = document.getElementById("featured-products");
   const allContainer = document.getElementById("all-products");
 

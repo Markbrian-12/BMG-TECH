@@ -1,0 +1,30 @@
+.categories {
+  display: flex;
+  justify-content: center;
+  gap: 10px;
+  padding: 10px;
+}
+
+.category-btn {
+  padding: 8px 12px;
+  background: #f68b1e;
+  border: none;
+  color: white;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.featured-deals {
+  padding: 20px;
+  background: #fff3e0;
+  margin: 20px;
+  border-radius: 5px;
+}
+
+.featured-deals h2 {
+  color: #f68b1e;
+}
+
+.all-products {
+  padding: 20px;
+}

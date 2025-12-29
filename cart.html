@@ -1,0 +1,110 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Cart - Bossie Shop</title>
+  <link rel="stylesheet" href="css/style.css">
+  <style>
+    /* Additional cart styles */
+    .cart-container {
+      padding: 20px;
+    }
+    .cart-item {
+      background: white;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 10px;
+      margin-bottom: 10px;
+      border-radius: 5px;
+    }
+    .cart-item span {
+      margin: 0 10px;
+    }
+    .cart-item input {
+      width: 50px;
+      padding: 5px;
+    }
+    .total {
+      font-size: 20px;
+      font-weight: bold;
+      text-align: right;
+      padding: 10px 0;
+    }
+    .checkout-btn {
+      background: #f68b1e;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      cursor: pointer;
+      border-radius: 5px;
+      float: right;
+    }
+  </style>
+</head>
+<body>
+
+<header>
+  <h1>Bossie Shop - Cart</h1>
+  <a href="index.html">🏠 Home</a>
+</header>
+
+<main class="cart-container">
+  <div class="cart-items"></div>
+  <div class="total">Total: KES 0</div>
+  <button class="checkout-btn" onclick="alert('Checkout feature coming soon!')">Checkout</button>
+</main>
+
+<script>
+  const cartContainer = document.querySelector(".cart-items");
+  const totalDisplay = document.querySelector(".total");
+
+  let cart = JSON.parse(localStorage.getItem("cart")) || [];
+
+  function renderCart() {
+    cartContainer.innerHTML = "";
+    let total = 0;
+
+    cart.forEach((item, index) => {
+      const priceNumber = Number(item.price.replace(/[^0-9]/g, ""));
+      total += priceNumber * (item.qty || 1);
+
+      const div = document.createElement("div");
+      div.classList.add("cart-item");
+      div.innerHTML = `
+        <span>${item.name}</span>
+        <span>KES ${priceNumber}</span>
+        <input type="number" min="1" value="${item.qty || 1}" data-index="${index}">
+        <button data-index="${index}">Remove</button>
+      `;
+      cartContainer.appendChild(div);
+    });
+
+    totalDisplay.innerText = `Total: KES ${total}`;
+  }
+
+  renderCart();
+
+  // Update quantity
+  cartContainer.addEventListener("input", (e) => {
+    if (e.target.tagName === "INPUT") {
+      const idx = e.target.dataset.index;
+      cart[idx].qty = Number(e.target.value);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      renderCart();
+    }
+  });
+
+  // Remove item
+  cartContainer.addEventListener("click", (e) => {
+    if (e.target.tagName === "BUTTON") {
+      const idx = e.target.dataset.index;
+      cart.splice(idx, 1);
+      localStorage.setItem("cart", JSON.stringify(cart));
+      renderCart();
+    }
+  });
+</script>
+
+</body>
+</html>

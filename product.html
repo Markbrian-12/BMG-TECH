@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Product - Bossie Shop</title>
+  <link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header>
+  <h1>Bossie Shop</h1>
+  <a href="index.html">🏠 Home</a>
+  <a href="cart.html">🛒 Cart</a>
+</header>
+
+<main class="product-detail">
+  <img id="product-img" src="images/item1.jpg" alt="Product" style="width:300px; border-radius:5px;">
+  <h2 id="product-name">Product Name</h2>
+  <p id="product-price">KES 0</p>
+  <button id="add-cart-btn">Add to Cart</button>
+</main>
+
+<script src="js/app.js"></script>
+<script>
+  // Get item from query string
+  const params = new URLSearchParams(window.location.search);
+  const itemName = params.get("item");
+
+  // Map of product details
+  const products = {
+    "Hair Clippers": { price: "KES 2,500", img: "images/item1.jpg" },
+    "Cosmetics Kit": { price: "KES 1,800", img: "images/item2.jpg" },
+    "Premium Shampoo": { price: "KES 900", img: "images/item3.jpg" }
+  };
+
+  const product = products[itemName] || { price: "KES 0", img: "images/item1.jpg" };
+
+  document.getElementById("product-name").innerText = itemName;
+  document.getElementById("product-price").innerText = product.price;
+  document.getElementById("product-img").src = product.img;
+
+  // Add to cart button
+  document.getElementById("add-cart-btn").addEventListener("click", () => {
+    let cart = JSON.parse(localStorage.getItem("cart")) || [];
+    cart.push({ name: itemName, price: product.price });
+    localStorage.setItem("cart", JSON.stringify(cart));
+    alert(`${itemName} added to cart!`);
+  });
+</script>
+</body>
+</html>

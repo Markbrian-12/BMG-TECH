@@ -2,43 +2,42 @@
 <html lang="en">
 <head>
   <meta charset="UTF-8">
-  <title>BMG-TECH Admin Portal</title>
-  <link rel="stylesheet" href="css/admin.css">
+  <title>BMG-TECH | Admin Portal</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
-<header>
-  <h1>BMG-TECH Admin Portal</h1>
-  <a href="index.html">🏠 Home</a>
-</header>
+  <header>
+    <h1>BMG-TECH Admin Portal</h1>
+    <a href="index.html">Home</a>
+  </header>
 
-<main class="admin-container">
-  <section class="add-product">
-    <h2>Add New Product</h2>
-    <input type="text" id="product-name" placeholder="Product Name">
-    <input type="number" id="product-price" placeholder="Price (KES)">
-    <input type="text" id="product-img" placeholder="Image URL">
-    <input type="text" id="product-category" placeholder="Category">
-    <button id="add-product-btn">Add Product</button>
-  </section>
+  <main class="admin-container" style="padding:20px;">
+    <section class="add-product">
+      <h2>Add New Product</h2>
+      <input type="text" id="product-name" placeholder="Product Name">
+      <input type="number" id="product-price" placeholder="Price (KES)">
+      <input type="text" id="product-img" placeholder="Image URL">
+      <input type="text" id="product-category" placeholder="Category">
+      <button id="add-product-btn">Add Product</button>
+    </section>
 
-  <section class="product-list">
-    <h2>Existing Products</h2>
-    <table>
-      <thead>
-        <tr>
-          <th>Name</th>
-          <th>Price (KES)</th>
-          <th>Category</th>
-          <th>Image</th>
-          <th>Actions</th>
-        </tr>
-      </thead>
-      <tbody id="product-table-body">
-      </tbody>
-    </table>
-  </section>
-</main>
+    <section class="product-list">
+      <h2>Existing Products</h2>
+      <table>
+        <thead>
+          <tr>
+            <th>Name</th>
+            <th>Price (KES)</th>
+            <th>Category</th>
+            <th>Image</th>
+            <th>Actions</th>
+          </tr>
+        </thead>
+        <tbody id="product-table-body"></tbody>
+      </table>
+    </section>
+  </main>
 
-<script src="js/admin.js"></script>
+  <script src="js/admin.js"></script>
 </body>
 </html>

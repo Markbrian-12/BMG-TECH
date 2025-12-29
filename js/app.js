@@ -30,17 +30,19 @@ document.addEventListener("DOMContentLoaded", () => {
   if (featuredContainer) renderProducts(featuredContainer, products.slice(0,1)); // First product as featured
   if (allContainer) renderProducts(allContainer, products);
 
-  // Search
-  const searchInput = document.getElementById("search");
-  if (searchInput) {
-    searchInput.addEventListener("input", e => {
-      const query = e.target.value.toLowerCase();
+  // SEARCH with Enter key
+const searchInput = document.getElementById("search");
+if(searchInput){
+  searchInput.addEventListener("keydown", e => {
+    if(e.key === "Enter"){ // Trigger search on Enter
+      const query = searchInput.value.toLowerCase();
       document.querySelectorAll(".products .product").forEach(product => {
         const name = product.querySelector("h3").innerText.toLowerCase();
         product.style.display = name.includes(query) ? "block" : "none";
       });
-    });
-  }
+    }
+  });
+}
 
   // Category filter
   document.querySelectorAll(".category-btn").forEach(btn => {

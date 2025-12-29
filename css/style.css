@@ -45,3 +45,9 @@ button:hover{ background:#e55c00;}
 .checkout-btn:hover{ background:#e55c00; }
 
 footer{ background:#222; color:white; text-align:center; padding:20px; margin-top:30px; font-size:14px;}
+.highlight {
+  background-color: #f68b1e;
+  color: #fff;
+  padding: 2px 4px;
+  border-radius: 3px;
+}
